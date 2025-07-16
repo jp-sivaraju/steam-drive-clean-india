@@ -1,7 +1,8 @@
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Calendar } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 
 const ContactSection = () => {
   const contactInfo = [
@@ -108,21 +109,6 @@ const ContactSection = () => {
 
           {/* Quick Actions */}
           <div className="space-y-6">
-            <Card className="p-8 bg-gradient-hero text-primary-foreground text-center">
-              <h3 className="text-xl font-semibold mb-4">Ready to Book?</h3>
-              <p className="mb-6 text-primary-foreground/80">
-                Choose your car type and plan to get started with our premium car wash service.
-              </p>
-              <Button variant="secondary" size="lg" className="w-full mb-4">
-                <Calendar className="h-5 w-5 mr-2" />
-                Book Your Car Wash
-              </Button>
-              <Button variant="outline" size="lg" className="w-full bg-white/10 text-primary-foreground border-white/30 hover:bg-white/20">
-                <MessageCircle className="h-5 w-5 mr-2" />
-                Chat with Support
-              </Button>
-            </Card>
-
             {/* Service Areas */}
             <Card className="p-6">
               <h4 className="text-lg font-semibold text-foreground mb-4">Service Areas in Hyderabad</h4>
@@ -151,6 +137,17 @@ const ContactSection = () => {
               <Button variant="secondary" size="sm">
                 <Phone className="h-4 w-4 mr-2" />
                 Call Emergency Line
+              </Button>
+            </Card>
+
+            <Card className="p-6 bg-gradient-hero text-primary-foreground text-center">
+              <h3 className="text-xl font-semibold mb-4">Chat with Support</h3>
+              <p className="mb-6 text-primary-foreground/80">
+                Have questions about our services? Our support team is here to help.
+              </p>
+              <Button variant="outline" size="lg" className="w-full bg-white/10 text-primary-foreground border-white/30 hover:bg-white/20">
+                <MessageCircle className="h-5 w-5 mr-2" />
+                Start Chat
               </Button>
             </Card>
           </div>

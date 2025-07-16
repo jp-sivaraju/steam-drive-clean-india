@@ -82,17 +82,12 @@ const Navbar = ({ currentStep = "home", onNavigateHome, showBackToHome = false }
                 {item.name}
               </button>
             ))}
-            <div className="flex items-center space-x-2">
-              <Link to="/consumer-login">
-                <Button variant="outline" size="sm" className="flex items-center space-x-1">
-                  <User className="h-4 w-4" />
-                  <span>Login</span>
-                </Button>
-              </Link>
-              <Button variant="default" size="sm">
-                Book Now
+            <Link to="/consumer-login">
+              <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                <User className="h-4 w-4" />
+                <span>Login</span>
               </Button>
-            </div>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -130,16 +125,13 @@ const Navbar = ({ currentStep = "home", onNavigateHome, showBackToHome = false }
                   {item.name}
                 </button>
               ))}
-              <div className="px-3 py-2 space-y-2">
+              <div className="px-3 py-2">
                 <Link to="/consumer-login" className="block">
                   <Button variant="outline" size="sm" className="w-full flex items-center justify-center space-x-1">
                     <User className="h-4 w-4" />
                     <span>Login</span>
                   </Button>
                 </Link>
-                <Button variant="default" size="sm" className="w-full">
-                  Book Now
-                </Button>
               </div>
             </div>
           </div>
