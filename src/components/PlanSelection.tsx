@@ -13,18 +13,21 @@ interface Plan {
   price: number;
   validity: string;
   bonusCredits: number;
+  vehicleTypes: string[];
   features: string[];
   popular?: boolean;
   description: string;
 }
 
 const plans: Plan[] = [
+  // Car Plans
   {
     id: "monthly-premium",
     name: "MONTHLY PREMIUM CAR WASH",
     price: 1400,
     validity: "30 days",
     bonusCredits: 1,
+    vehicleTypes: ["sedan", "suv", "hatchback"],
     features: [
       "Complete exterior wash",
       "Interior vacuum & wipe",
@@ -42,6 +45,7 @@ const plans: Plan[] = [
     price: 899,
     validity: "Unlimited",
     bonusCredits: 1,
+    vehicleTypes: ["sedan", "suv", "hatchback"],
     features: [
       "Single premium wash",
       "No expiry date",
@@ -58,6 +62,7 @@ const plans: Plan[] = [
     price: 1300,
     validity: "30 days",
     bonusCredits: 0,
+    vehicleTypes: ["sedan", "suv", "hatchback"],
     features: [
       "Daily external dusting",
       "Weekly premium wash",
@@ -74,6 +79,7 @@ const plans: Plan[] = [
     price: 1050,
     validity: "30 days",
     bonusCredits: 0,
+    vehicleTypes: ["sedan", "suv", "hatchback"],
     features: [
       "Daily external dusting",
       "Bi-weekly steam wash",
@@ -90,6 +96,7 @@ const plans: Plan[] = [
     price: 500,
     validity: "30 days",
     bonusCredits: 0,
+    vehicleTypes: ["sedan", "suv", "hatchback"],
     features: [
       "Daily external dusting",
       "Quick cleaning",
@@ -99,18 +106,93 @@ const plans: Plan[] = [
       "Entry-level care"
     ],
     description: "Basic daily maintenance plan"
+  },
+  // Bike Plans
+  {
+    id: "bike-premium-monthly",
+    name: "MONTHLY PREMIUM BIKE WASH",
+    price: 800,
+    validity: "30 days",
+    bonusCredits: 2,
+    vehicleTypes: ["bike"],
+    features: [
+      "Complete bike wash",
+      "Engine cleaning",
+      "Chain lubrication",
+      "Polish & shine",
+      "Seat cleaning",
+      "2 Bonus wash credits"
+    ],
+    popular: true,
+    description: "Complete premium bike care package"
+  },
+  {
+    id: "bike-pay-per-use",
+    name: "BIKE PAY PER USE",
+    price: 299,
+    validity: "Unlimited",
+    bonusCredits: 1,
+    vehicleTypes: ["bike"],
+    features: [
+      "Single premium bike wash",
+      "Engine degreasing",
+      "Chain maintenance",
+      "1 Bonus wash credit",
+      "No expiry date",
+      "Flexible timing"
+    ],
+    description: "Perfect for occasional bike cleaning"
+  },
+  {
+    id: "bike-weekly-care",
+    name: "WEEKLY BIKE CARE",
+    price: 600,
+    validity: "30 days",
+    bonusCredits: 0,
+    vehicleTypes: ["bike"],
+    features: [
+      "Weekly professional wash",
+      "Chain lubrication service",
+      "Basic engine cleaning",
+      "Tire shine",
+      "Quick maintenance check",
+      "Weather protection"
+    ],
+    description: "Regular weekly maintenance for your bike"
+  },
+  {
+    id: "bike-express-wash",
+    name: "BIKE EXPRESS WASH",
+    price: 350,
+    validity: "14 days",
+    bonusCredits: 0,
+    vehicleTypes: ["bike"],
+    features: [
+      "Quick exterior wash",
+      "Basic chain cleaning",
+      "Seat wipe down",
+      "Quick dry",
+      "Express service",
+      "15-minute completion"
+    ],
+    description: "Fast and efficient bike cleaning"
   }
 ];
 
 interface PlanSelectionProps {
   selectedCarType: CarType;
-  onPlanSelect: (plan: Plan & { pickupType: "pickup" | "drop" }) => void;
-  selectedPlan?: Plan & { pickupType: "pickup" | "drop" };
+  onPlanSelect: (plan: Plan & { pickupType?: "pickup" | "drop" }) => void;
+  selectedPlan?: Plan & { pickupType?: "pickup" | "drop" };
 }
 
 const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSelectionProps) => {
   const [selectedPickupType, setSelectedPickupType] = useState<"pickup" | "drop">("pickup");
   const [currentSelectedPlan, setCurrentSelectedPlan] = useState<Plan | undefined>();
+
+  // Filter plans based on selected vehicle type
+  const filteredPlans = plans.filter(plan => 
+    plan.vehicleTypes.includes(selectedCarType.id)
+  );
 
   const handlePlanClick = (plan: Plan) => {
     setCurrentSelectedPlan(plan);
@@ -120,6 +202,11 @@ const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSele
     if (currentSelectedPlan) {
       onPlanSelect({ ...currentSelectedPlan, pickupType: selectedPickupType });
     }
+  };
+
+  const handleQuickSelect = (plan: Plan) => {
+    // For quick selection without service type (makes it optional)
+    onPlanSelect({ ...plan, pickupType: "pickup" }); // Default to pickup
   };
 
   return (
@@ -135,7 +222,7 @@ const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSele
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {plans.map((plan) => {
+          {filteredPlans.map((plan) => {
             const isSelected = currentSelectedPlan?.id === plan.id;
             
             return (
@@ -191,9 +278,22 @@ const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSele
                   
                   <Button
                     variant={isSelected ? "secondary" : "default"}
-                    className="w-full"
+                    className="w-full mb-2"
                   >
                     {isSelected ? "Selected" : "Choose This Plan"}
+                  </Button>
+                  
+                  {/* Quick Select Option - bypasses service type selection */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleQuickSelect(plan);
+                    }}
+                  >
+                    Quick Select (Pickup)
                   </Button>
                 </div>
               </Card>
