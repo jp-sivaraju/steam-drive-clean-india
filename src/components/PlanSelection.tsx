@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,93 +21,6 @@ interface Plan {
 }
 
 const plans: Plan[] = [
-  // Car Plans
-  {
-    id: "monthly-premium",
-    name: "MONTHLY PREMIUM CAR WASH",
-    price: 1400,
-    validity: "30 days",
-    bonusCredits: 1,
-    vehicleTypes: ["sedan", "suv", "hatchback"],
-    features: [
-      "Complete exterior wash",
-      "Interior vacuum & wipe",
-      "Premium foam treatment",
-      "Tire shine & polish",
-      "Dashboard cleaning",
-      "1 Bonus wash credit"
-    ],
-    popular: true,
-    description: "Complete premium service with bonus credits"
-  },
-  {
-    id: "pay-per-use",
-    name: "PAY PER USE",
-    price: 899,
-    validity: "Unlimited",
-    bonusCredits: 1,
-    vehicleTypes: ["sedan", "suv", "hatchback"],
-    features: [
-      "Single premium wash",
-      "No expiry date",
-      "Use anytime",
-      "1 Bonus wash credit",
-      "All premium features",
-      "Flexible scheduling"
-    ],
-    description: "Perfect for occasional users"
-  },
-  {
-    id: "daily-dusting-premium",
-    name: "DAILY DUSTING + PREMIUM CAR WASH",
-    price: 1300,
-    validity: "30 days",
-    bonusCredits: 0,
-    vehicleTypes: ["sedan", "suv", "hatchback"],
-    features: [
-      "Daily external dusting",
-      "Weekly premium wash",
-      "Maintenance protection",
-      "Quick touch-ups",
-      "Priority booking",
-      "Weather protection"
-    ],
-    description: "Daily care with weekly deep cleaning"
-  },
-  {
-    id: "daily-dusting-steam",
-    name: "DAILY DUSTING + STANDARD STEAM CAR WASH",
-    price: 1050,
-    validity: "30 days",
-    bonusCredits: 0,
-    vehicleTypes: ["sedan", "suv", "hatchback"],
-    features: [
-      "Daily external dusting",
-      "Bi-weekly steam wash",
-      "Eco-friendly cleaning",
-      "Quick maintenance",
-      "Standard detailing",
-      "Regular care routine"
-    ],
-    description: "Eco-friendly daily maintenance"
-  },
-  {
-    id: "daily-dusting",
-    name: "DAILY DUSTING",
-    price: 500,
-    validity: "30 days",
-    bonusCredits: 0,
-    vehicleTypes: ["sedan", "suv", "hatchback"],
-    features: [
-      "Daily external dusting",
-      "Quick cleaning",
-      "Dust removal",
-      "Basic maintenance",
-      "Weather protection",
-      "Entry-level care"
-    ],
-    description: "Basic daily maintenance plan"
-  },
   // Bike Plans
   {
     id: "bike-premium-monthly",
@@ -176,6 +90,276 @@ const plans: Plan[] = [
       "15-minute completion"
     ],
     description: "Fast and efficient bike cleaning"
+  },
+
+  // Hatchback Plans
+  {
+    id: "hatchback-premium-monthly",
+    name: "MONTHLY PREMIUM HATCHBACK WASH",
+    price: 1200,
+    validity: "30 days",
+    bonusCredits: 1,
+    vehicleTypes: ["hatchback"],
+    features: [
+      "Complete exterior wash",
+      "Interior vacuum & wipe",
+      "Premium foam treatment",
+      "Tire shine & polish",
+      "Dashboard cleaning",
+      "1 Bonus wash credit"
+    ],
+    popular: true,
+    description: "Complete premium service for compact cars"
+  },
+  {
+    id: "hatchback-pay-per-use",
+    name: "HATCHBACK PAY PER USE",
+    price: 799,
+    validity: "Unlimited",
+    bonusCredits: 1,
+    vehicleTypes: ["hatchback"],
+    features: [
+      "Single premium wash",
+      "No expiry date",
+      "Use anytime",
+      "1 Bonus wash credit",
+      "All premium features",
+      "Flexible scheduling"
+    ],
+    description: "Perfect for occasional compact car cleaning"
+  },
+  {
+    id: "hatchback-steam-wash",
+    name: "HATCHBACK STEAM WASH",
+    price: 950,
+    validity: "30 days",
+    bonusCredits: 0,
+    vehicleTypes: ["hatchback"],
+    features: [
+      "Eco-friendly steam cleaning",
+      "Interior sanitization",
+      "Exterior polish",
+      "Wheel cleaning",
+      "Glass treatment",
+      "Environment friendly"
+    ],
+    description: "Eco-friendly steam cleaning for hatchbacks"
+  },
+
+  // Sedan Plans
+  {
+    id: "sedan-premium-monthly",
+    name: "MONTHLY PREMIUM SEDAN WASH",
+    price: 1400,
+    validity: "30 days",
+    bonusCredits: 1,
+    vehicleTypes: ["sedan"],
+    features: [
+      "Complete exterior wash",
+      "Interior vacuum & wipe",
+      "Premium foam treatment",
+      "Tire shine & polish",
+      "Dashboard cleaning",
+      "1 Bonus wash credit"
+    ],
+    popular: true,
+    description: "Complete premium service for mid-size cars"
+  },
+  {
+    id: "sedan-pay-per-use",
+    name: "SEDAN PAY PER USE",
+    price: 899,
+    validity: "Unlimited",
+    bonusCredits: 1,
+    vehicleTypes: ["sedan"],
+    features: [
+      "Single premium wash",
+      "No expiry date",
+      "Use anytime",
+      "1 Bonus wash credit",
+      "All premium features",
+      "Flexible scheduling"
+    ],
+    description: "Perfect for occasional sedan cleaning"
+  },
+  {
+    id: "sedan-deluxe-package",
+    name: "SEDAN DELUXE PACKAGE",
+    price: 1600,
+    validity: "30 days",
+    bonusCredits: 2,
+    vehicleTypes: ["sedan"],
+    features: [
+      "Premium exterior wash",
+      "Deep interior cleaning",
+      "Wax coating",
+      "Engine bay cleaning",
+      "Trunk organization",
+      "2 Bonus wash credits"
+    ],
+    description: "Deluxe package with extra features"
+  },
+
+  // SUV Plans
+  {
+    id: "suv-premium-monthly",
+    name: "MONTHLY PREMIUM SUV WASH",
+    price: 1600,
+    validity: "30 days",
+    bonusCredits: 1,
+    vehicleTypes: ["suv"],
+    features: [
+      "Complete exterior wash",
+      "Interior vacuum & wipe",
+      "Premium foam treatment",
+      "Tire shine & polish",
+      "Dashboard cleaning",
+      "1 Bonus wash credit"
+    ],
+    popular: true,
+    description: "Complete premium service for SUVs"
+  },
+  {
+    id: "suv-pay-per-use",
+    name: "SUV PAY PER USE",
+    price: 1099,
+    validity: "Unlimited",
+    bonusCredits: 1,
+    vehicleTypes: ["suv"],
+    features: [
+      "Single premium wash",
+      "No expiry date",
+      "Use anytime",
+      "1 Bonus wash credit",
+      "All premium features",
+      "Flexible scheduling"
+    ],
+    description: "Perfect for occasional SUV cleaning"
+  },
+  {
+    id: "suv-off-road-special",
+    name: "SUV OFF-ROAD SPECIAL",
+    price: 1800,
+    validity: "30 days",
+    bonusCredits: 2,
+    vehicleTypes: ["suv"],
+    features: [
+      "Deep undercarriage cleaning",
+      "Mud & dirt removal",
+      "Protective coating",
+      "Wheel well cleaning",
+      "Interior deep clean",
+      "2 Bonus wash credits"
+    ],
+    description: "Special package for off-road SUVs"
+  },
+
+  // XUV Plans
+  {
+    id: "xuv-premium-monthly",
+    name: "MONTHLY PREMIUM XUV WASH",
+    price: 1800,
+    validity: "30 days",
+    bonusCredits: 2,
+    vehicleTypes: ["xuv"],
+    features: [
+      "Complete exterior wash",
+      "Interior vacuum & wipe",
+      "Premium foam treatment",
+      "Tire shine & polish",
+      "Dashboard cleaning",
+      "2 Bonus wash credits"
+    ],
+    popular: true,
+    description: "Complete premium service for large SUVs"
+  },
+  {
+    id: "xuv-pay-per-use",
+    name: "XUV PAY PER USE",
+    price: 1299,
+    validity: "Unlimited",
+    bonusCredits: 1,
+    vehicleTypes: ["xuv"],
+    features: [
+      "Single premium wash",
+      "No expiry date",
+      "Use anytime",
+      "1 Bonus wash credit",
+      "All premium features",
+      "Flexible scheduling"
+    ],
+    description: "Perfect for occasional large SUV cleaning"
+  },
+  {
+    id: "xuv-family-package",
+    name: "XUV FAMILY PACKAGE",
+    price: 2000,
+    validity: "30 days",
+    bonusCredits: 3,
+    vehicleTypes: ["xuv"],
+    features: [
+      "Premium exterior wash",
+      "Deep interior cleaning",
+      "Seat conditioning",
+      "Carpet shampooing",
+      "Air freshening",
+      "3 Bonus wash credits"
+    ],
+    description: "Family-focused package for large vehicles"
+  },
+
+  // Premium Plans
+  {
+    id: "premium-luxury-monthly",
+    name: "MONTHLY LUXURY PREMIUM WASH",
+    price: 2500,
+    validity: "30 days",
+    bonusCredits: 3,
+    vehicleTypes: ["premium"],
+    features: [
+      "Hand wash exterior",
+      "Premium leather treatment",
+      "Ceramic coating",
+      "Engine detailing",
+      "Luxury interior care",
+      "3 Bonus wash credits"
+    ],
+    popular: true,
+    description: "Ultimate luxury car care experience"
+  },
+  {
+    id: "premium-pay-per-use",
+    name: "PREMIUM PAY PER USE",
+    price: 1899,
+    validity: "Unlimited",
+    bonusCredits: 2,
+    vehicleTypes: ["premium"],
+    features: [
+      "Single luxury wash",
+      "No expiry date",
+      "Use anytime",
+      "2 Bonus wash credits",
+      "All luxury features",
+      "Priority scheduling"
+    ],
+    description: "Perfect for occasional luxury car cleaning"
+  },
+  {
+    id: "premium-concierge-service",
+    name: "PREMIUM CONCIERGE SERVICE",
+    price: 3000,
+    validity: "30 days",
+    bonusCredits: 4,
+    vehicleTypes: ["premium"],
+    features: [
+      "White glove service",
+      "Paint protection",
+      "Interior restoration",
+      "Custom detailing",
+      "Pick-up & delivery",
+      "4 Bonus wash credits"
+    ],
+    description: "Concierge-level service for luxury vehicles"
   }
 ];
 
