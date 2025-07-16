@@ -1,39 +1,64 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Droplets, Clock, Shield } from "lucide-react";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onGetStarted?: () => void;
+}
+
+const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
+  const handleGetStarted = () => {
+    if (onGetStarted) {
+      onGetStarted();
+    } else {
+      const servicesSection = document.getElementById('services');
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
-    <section id="home" className="pt-20 pb-16 bg-gradient-hero text-primary-foreground relative overflow-hidden">
+    <section id="home" className="pt-20 pb-16 bg-background text-foreground relative overflow-hidden dark-pattern">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDIwSDQwVjQwSDIwVjIwWiIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjAzIi8+Cjwvc3ZnPgo=')] opacity-30"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center px-4 py-2 bg-secondary/20 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-              <Sparkles className="h-4 w-4 mr-2" />
+            <div className="inline-flex items-center px-4 py-2 bg-primary/20 rounded-full text-sm font-medium mb-6 backdrop-blur-sm border border-primary/30">
+              <Sparkles className="h-4 w-4 mr-2 text-primary" />
               Eco-Friendly Steam Technology
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
               Premium Car Wash
               <br />
-              <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Made Simple
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl">
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">
               Experience the finest steam cleaning technology that delivers exceptional results while being gentle on your car and the environment.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button variant="hero" size="lg" className="text-lg px-8 py-6">
+              <Button 
+                variant="default" 
+                size="lg" 
+                className="text-lg px-8 py-6 bg-gradient-primary hover:scale-105 hover:shadow-primary"
+                onClick={handleGetStarted}
+              >
                 Select Your Car Type
               </Button>
-              <Button variant="outline" size="lg" className="bg-white/10 text-primary-foreground border-white/30 hover:bg-white/20">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-primary/50 text-primary hover:bg-primary/10"
+              >
                 Learn More
               </Button>
             </div>
@@ -47,9 +72,9 @@ const HeroSection = () => {
                 { icon: Sparkles, label: "Eco", value: "Friendly" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <stat.icon className="h-8 w-8 mx-auto mb-2 text-secondary" />
-                  <div className="text-lg font-bold">{stat.value}</div>
-                  <div className="text-sm text-primary-foreground/70">{stat.label}</div>
+                  <stat.icon className="h-8 w-8 mx-auto mb-2 text-primary" />
+                  <div className="text-lg font-bold text-foreground">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -57,7 +82,7 @@ const HeroSection = () => {
 
           {/* Right content - Feature cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Card className="p-6 bg-gradient-card backdrop-blur-sm border-white/20 hover:scale-105 transition-transform duration-300">
+            <Card className="p-6 bg-card border-border hover:scale-105 transition-transform duration-300 hover:shadow-primary/10">
               <Droplets className="h-12 w-12 text-primary mb-4" />
               <h3 className="text-lg font-semibold text-foreground mb-2">Steam Technology</h3>
               <p className="text-muted-foreground text-sm">
@@ -65,7 +90,7 @@ const HeroSection = () => {
               </p>
             </Card>
 
-            <Card className="p-6 bg-gradient-card backdrop-blur-sm border-white/20 hover:scale-105 transition-transform duration-300">
+            <Card className="p-6 bg-card border-border hover:scale-105 transition-transform duration-300 hover:shadow-secondary/10">
               <Shield className="h-12 w-12 text-secondary mb-4" />
               <h3 className="text-lg font-semibold text-foreground mb-2">Eco-Friendly</h3>
               <p className="text-muted-foreground text-sm">
@@ -73,7 +98,7 @@ const HeroSection = () => {
               </p>
             </Card>
 
-            <Card className="p-6 bg-gradient-card backdrop-blur-sm border-white/20 hover:scale-105 transition-transform duration-300">
+            <Card className="p-6 bg-card border-border hover:scale-105 transition-transform duration-300 hover:shadow-accent/10">
               <Clock className="h-12 w-12 text-accent mb-4" />
               <h3 className="text-lg font-semibold text-foreground mb-2">Quick Service</h3>
               <p className="text-muted-foreground text-sm">
@@ -81,7 +106,7 @@ const HeroSection = () => {
               </p>
             </Card>
 
-            <Card className="p-6 bg-gradient-card backdrop-blur-sm border-white/20 hover:scale-105 transition-transform duration-300">
+            <Card className="p-6 bg-card border-border hover:scale-105 transition-transform duration-300 hover:shadow-primary/10">
               <Sparkles className="h-12 w-12 text-primary mb-4" />
               <h3 className="text-lg font-semibold text-foreground mb-2">Premium Care</h3>
               <p className="text-muted-foreground text-sm">

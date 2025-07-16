@@ -93,41 +93,41 @@ const CarTypeSelection = ({ onCarTypeSelect, selectedCarType }: CarTypeSelection
             return (
               <Card
                 key={carType.id}
-                className={`group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-elegant border-2 ${
+                className={`group cursor-pointer transition-all duration-300 hover:scale-105 border-2 ${
                   isSelected
-                    ? "border-primary bg-gradient-primary text-primary-foreground"
-                    : "border-border hover:border-primary/50"
-                } ${carType.popular ? "ring-2 ring-secondary/20" : ""}`}
+                    ? "border-primary bg-primary/10 shadow-primary/20"
+                    : "border-border hover:border-primary/50 bg-card"
+                } ${carType.popular ? "ring-2 ring-primary/30" : ""}`}
                 onClick={() => onCarTypeSelect(carType)}
               >
                 <div className="p-6 text-center">
                   {carType.popular && (
-                    <Badge className="mb-4 bg-secondary text-secondary-foreground">
+                    <Badge className="mb-4 bg-primary text-primary-foreground">
                       Most Popular
                     </Badge>
                   )}
                   
-                  <div className={`mb-4 ${isSelected ? "text-primary-foreground" : "text-primary"}`}>
+                  <div className={`mb-4 ${isSelected ? "text-primary" : "text-primary"}`}>
                     <IconComponent className="h-16 w-16 mx-auto" />
                   </div>
                   
-                  <h3 className={`text-xl font-bold mb-2 ${isSelected ? "text-primary-foreground" : "text-foreground"}`}>
+                  <h3 className={`text-xl font-bold mb-2 ${isSelected ? "text-primary" : "text-foreground"}`}>
                     {carType.name}
                   </h3>
                   
-                  <p className={`text-sm mb-3 ${isSelected ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                  <p className={`text-sm mb-3 ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
                     {carType.description}
                   </p>
                   
                   <div className="mb-4">
-                    <div className={`text-xs mb-2 ${isSelected ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                    <div className={`text-xs mb-2 ${isSelected ? "text-muted-foreground" : "text-muted-foreground"}`}>
                       Examples:
                     </div>
                     <div className="flex flex-wrap gap-1 justify-center">
                       {carType.examples.slice(0, 4).map((example, index) => (
                         <Badge
                           key={index}
-                          variant={isSelected ? "secondary" : "outline"}
+                          variant={isSelected ? "default" : "outline"}
                           className="text-xs"
                         >
                           {example}
@@ -136,12 +136,12 @@ const CarTypeSelection = ({ onCarTypeSelect, selectedCarType }: CarTypeSelection
                     </div>
                   </div>
                   
-                  <div className={`text-lg font-semibold mb-4 ${isSelected ? "text-primary-foreground" : "text-primary"}`}>
+                  <div className={`text-lg font-semibold mb-4 ${isSelected ? "text-primary" : "text-primary"}`}>
                     {carType.price}
                   </div>
                   
                   <Button
-                    variant={isSelected ? "secondary" : "default"}
+                    variant={isSelected ? "default" : "outline"}
                     className="w-full"
                     size="sm"
                   >
@@ -155,7 +155,7 @@ const CarTypeSelection = ({ onCarTypeSelect, selectedCarType }: CarTypeSelection
 
         {selectedCarType && (
           <div className="mt-12 text-center">
-            <Card className="inline-block p-6 bg-gradient-card border-primary/20">
+            <Card className="inline-block p-6 bg-card border-primary/20">
               <p className="text-lg font-medium text-foreground mb-2">
                 Great choice! You selected: <span className="text-primary font-bold">{selectedCarType.name}</span>
               </p>

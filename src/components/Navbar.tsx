@@ -1,8 +1,15 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Car, Droplets } from "lucide-react";
+import { Menu, X, Car, Droplets, Home } from "lucide-react";
 
-const Navbar = () => {
+interface NavbarProps {
+  currentStep?: string;
+  onNavigateHome?: () => void;
+  showBackToHome?: boolean;
+}
+
+const Navbar = ({ currentStep = "home", onNavigateHome, showBackToHome = false }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -12,12 +19,37 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const handleBackToHome = () => {
+    if (onNavigateHome) {
+      onNavigateHome();
+    }
+    setIsOpen(false);
+  };
+
+  const scrollToSection = (href: string) => {
+    if (currentStep !== "home" && onNavigateHome) {
+      onNavigateHome();
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={handleBackToHome}>
             <div className="relative">
               <Car className="h-8 w-8 text-primary" />
               <Droplets className="h-4 w-4 text-secondary absolute -top-1 -right-1" />
@@ -30,16 +62,26 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
+            {showBackToHome && (
+              <Button 
+                variant="ghost" 
+                onClick={handleBackToHome}
+                className="flex items-center space-x-2 text-foreground hover:text-primary"
+              >
+                <Home className="h-4 w-4" />
+                <span>Back to Home</span>
+              </Button>
+            )}
+            {currentStep === "home" && navItems.map((item) => (
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => scrollToSection(item.href)}
                 className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
-            <Button variant="hero" size="sm">
+            <Button variant="default" size="sm">
               Book Now
             </Button>
           </div>
@@ -60,18 +102,27 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-card border-t border-border">
-              {navItems.map((item) => (
-                <a
+              {showBackToHome && (
+                <Button 
+                  variant="ghost" 
+                  onClick={handleBackToHome}
+                  className="w-full justify-start flex items-center space-x-2"
+                >
+                  <Home className="h-4 w-4" />
+                  <span>Back to Home</span>
+                </Button>
+              )}
+              {currentStep === "home" && navItems.map((item) => (
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-300 font-medium"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => scrollToSection(item.href)}
+                  className="block w-full text-left px-3 py-2 text-foreground hover:text-primary transition-colors duration-300 font-medium"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               <div className="px-3 py-2">
-                <Button variant="hero" size="sm" className="w-full">
+                <Button variant="default" size="sm" className="w-full">
                   Book Now
                 </Button>
               </div>

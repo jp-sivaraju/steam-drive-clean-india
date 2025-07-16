@@ -31,11 +31,11 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-muted/20">
+    <section id="about" className="py-20 bg-muted/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <Badge className="mb-4 bg-secondary text-secondary-foreground">
+          <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">
             About Steam & Drive
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -53,7 +53,7 @@ const AboutSection = () => {
             return (
               <Card
                 key={index}
-                className="p-6 hover:scale-105 transition-transform duration-300 bg-gradient-card border-border/50 hover:shadow-elegant"
+                className="p-6 hover:scale-105 transition-transform duration-300 bg-card border-border hover:shadow-primary/10"
               >
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
@@ -99,8 +99,8 @@ const AboutSection = () => {
             </div>
           </div>
 
-          <Card className="p-8 bg-gradient-hero text-primary-foreground">
-            <h4 className="text-xl font-semibold mb-6">Why Choose Steam & Drive?</h4>
+          <Card className="p-8 bg-card border-primary/20">
+            <h4 className="text-xl font-semibold mb-6 text-foreground">Why Choose Steam & Drive?</h4>
             <div className="space-y-4">
               {[
                 { icon: Shield, text: "100% Safe & Non-toxic cleaning" },
@@ -113,8 +113,8 @@ const AboutSection = () => {
                 const IconComponent = item.icon;
                 return (
                   <div key={index} className="flex items-center space-x-3">
-                    <IconComponent className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span>{item.text}</span>
+                    <IconComponent className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">{item.text}</span>
                   </div>
                 );
               })}
