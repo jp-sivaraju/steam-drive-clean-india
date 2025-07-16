@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import CarTypeSelection from "@/components/CarTypeSelection";
@@ -16,7 +17,7 @@ type AppStep = "home" | "car-selection" | "plan-selection" | "summary" | "paymen
 const Index = () => {
   const [currentStep, setCurrentStep] = useState<AppStep>("home");
   const [selectedCarType, setSelectedCarType] = useState<CarType | undefined>();
-  const [selectedPlan, setSelectedPlan] = useState<Plan | undefined>();
+  const [selectedPlan, setSelectedPlan] = useState<(Plan & { pickupType: "pickup" | "drop" }) | undefined>();
   const [orderSummary, setOrderSummary] = useState<OrderSummary | undefined>();
 
   const handleCarTypeSelect = (carType: CarType) => {
@@ -24,7 +25,7 @@ const Index = () => {
     setCurrentStep("plan-selection");
   };
 
-  const handlePlanSelect = (plan: Plan) => {
+  const handlePlanSelect = (plan: Plan & { pickupType: "pickup" | "drop" }) => {
     setSelectedPlan(plan);
     setCurrentStep("summary");
   };

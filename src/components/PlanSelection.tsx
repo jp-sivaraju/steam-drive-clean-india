@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Star, Clock, Gift, Infinity } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Check, Star, Clock, Gift, Infinity, MapPin, Car } from "lucide-react";
 import type { CarType } from "./CarTypeSelection";
 
 interface Plan {
@@ -102,11 +104,24 @@ const plans: Plan[] = [
 
 interface PlanSelectionProps {
   selectedCarType: CarType;
-  onPlanSelect: (plan: Plan) => void;
-  selectedPlan?: Plan;
+  onPlanSelect: (plan: Plan & { pickupType: "pickup" | "drop" }) => void;
+  selectedPlan?: Plan & { pickupType: "pickup" | "drop" };
 }
 
 const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSelectionProps) => {
+  const [selectedPickupType, setSelectedPickupType] = useState<"pickup" | "drop">("pickup");
+  const [currentSelectedPlan, setCurrentSelectedPlan] = useState<Plan | undefined>();
+
+  const handlePlanClick = (plan: Plan) => {
+    setCurrentSelectedPlan(plan);
+  };
+
+  const handleProceed = () => {
+    if (currentSelectedPlan) {
+      onPlanSelect({ ...currentSelectedPlan, pickupType: selectedPickupType });
+    }
+  };
+
   return (
     <section className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,7 +136,7 @@ const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSele
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {plans.map((plan) => {
-            const isSelected = selectedPlan?.id === plan.id;
+            const isSelected = currentSelectedPlan?.id === plan.id;
             
             return (
               <Card
@@ -131,7 +146,7 @@ const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSele
                     ? "border-primary bg-gradient-primary text-primary-foreground shadow-primary"
                     : "border-border hover:border-primary/50 hover:shadow-elegant"
                 } ${plan.popular ? "ring-2 ring-secondary/20" : ""}`}
-                onClick={() => onPlanSelect(plan)}
+                onClick={() => handlePlanClick(plan)}
               >
                 <div className="p-6">
                   {plan.popular && (
@@ -186,21 +201,64 @@ const PlanSelection = ({ selectedCarType, onPlanSelect, selectedPlan }: PlanSele
           })}
         </div>
 
-        {selectedPlan && (
-          <div className="mt-12 text-center">
-            <Card className="inline-block p-6 bg-gradient-card border-primary/20">
-              <div className="flex items-center justify-center mb-4">
-                <Check className="h-6 w-6 text-secondary mr-2" />
-                <p className="text-lg font-medium text-foreground">
-                  Plan Selected: <span className="text-primary font-bold">{selectedPlan.name}</span>
+        {currentSelectedPlan && (
+          <div className="mt-12">
+            <Card className="max-w-2xl mx-auto p-8 bg-gradient-card border-primary/20">
+              <div className="text-center mb-6">
+                <div className="flex items-center justify-center mb-4">
+                  <Check className="h-6 w-6 text-secondary mr-2" />
+                  <p className="text-lg font-medium text-foreground">
+                    Plan Selected: <span className="text-primary font-bold">{currentSelectedPlan.name}</span>
+                  </p>
+                </div>
+                <p className="text-muted-foreground">
+                  Perfect! You've chosen the {currentSelectedPlan.name} for your {selectedCarType.name}.
                 </p>
               </div>
-              <p className="text-muted-foreground mb-4">
-                Perfect! You've chosen the {selectedPlan.name} for your {selectedCarType.name}.
-              </p>
-              <Button variant="hero" size="lg">
-                Proceed to Summary
-              </Button>
+
+              {/* Pickup/Drop Selection */}
+              <div className="space-y-4 mb-6">
+                <h3 className="text-lg font-semibold text-foreground flex items-center">
+                  <MapPin className="h-5 w-5 mr-2 text-primary" />
+                  Service Type
+                </h3>
+                <RadioGroup 
+                  value={selectedPickupType} 
+                  onValueChange={(value) => setSelectedPickupType(value as "pickup" | "drop")}
+                  className="grid grid-cols-1 gap-4"
+                >
+                  <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted/20">
+                    <RadioGroupItem value="pickup" id="pickup" />
+                    <Label htmlFor="pickup" className="flex-1 cursor-pointer">
+                      <div className="flex items-center">
+                        <Car className="h-4 w-4 mr-2 text-primary" />
+                        <div>
+                          <p className="font-medium text-foreground">Pickup Service</p>
+                          <p className="text-sm text-muted-foreground">We'll pick up your car and return it after service</p>
+                        </div>
+                      </div>
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted/20">
+                    <RadioGroupItem value="drop" id="drop" />
+                    <Label htmlFor="drop" className="flex-1 cursor-pointer">
+                      <div className="flex items-center">
+                        <MapPin className="h-4 w-4 mr-2 text-primary" />
+                        <div>
+                          <p className="font-medium text-foreground">Drop-off Service</p>
+                          <p className="text-sm text-muted-foreground">Bring your car to our facility</p>
+                        </div>
+                      </div>
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className="text-center">
+                <Button variant="hero" size="lg" onClick={handleProceed}>
+                  Proceed to Summary
+                </Button>
+              </div>
             </Card>
           </div>
         )}
