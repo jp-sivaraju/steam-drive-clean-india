@@ -23,6 +23,40 @@ interface Plan {
 const plans: Plan[] = [
   // Bike Plans
   {
+    id: "bike-daily-dusting-steam",
+    name: "DAILY DUSTING+ STANDARD STEAM CAR WASH",
+    price: 450,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["bike"],
+    features: [
+      "Daily dusting service",
+      "Standard steam cleaning",
+      "Quick exterior wash",
+      "Basic chain cleaning",
+      "Eco-friendly process",
+      "Weekly maintenance"
+    ],
+    description: "Daily dusting with steam cleaning for bikes"
+  },
+  {
+    id: "bike-daily-dusting",
+    name: "DAILY DUSTING",
+    price: 250,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["bike"],
+    features: [
+      "Daily dusting service",
+      "Quick exterior wipe",
+      "Basic seat cleaning",
+      "Mirror & headlight clean",
+      "Minimal water usage",
+      "Eco-friendly approach"
+    ],
+    description: "Quick daily dusting service for bikes"
+  },
+  {
     id: "bike-premium-monthly",
     name: "MONTHLY PREMIUM BIKE WASH",
     price: 800,
@@ -94,6 +128,40 @@ const plans: Plan[] = [
 
   // Hatchback Plans
   {
+    id: "hatchback-daily-dusting-steam",
+    name: "DAILY DUSTING+ STANDARD STEAM CAR WASH",
+    price: 650,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["hatchback"],
+    features: [
+      "Daily dusting service",
+      "Standard steam cleaning",
+      "Exterior wash & polish",
+      "Interior wipe down",
+      "Eco-friendly process",
+      "Weekly maintenance"
+    ],
+    description: "Daily dusting with steam cleaning for hatchbacks"
+  },
+  {
+    id: "hatchback-daily-dusting",
+    name: "DAILY DUSTING",
+    price: 400,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["hatchback"],
+    features: [
+      "Daily dusting service",
+      "Quick exterior wipe",
+      "Dashboard cleaning",
+      "Window cleaning",
+      "Minimal water usage",
+      "Eco-friendly approach"
+    ],
+    description: "Quick daily dusting service for hatchbacks"
+  },
+  {
     id: "hatchback-premium-monthly",
     name: "MONTHLY PREMIUM HATCHBACK WASH",
     price: 1200,
@@ -147,6 +215,40 @@ const plans: Plan[] = [
   },
 
   // Sedan Plans
+  {
+    id: "sedan-daily-dusting-steam",
+    name: "DAILY DUSTING+ STANDARD STEAM CAR WASH",
+    price: 750,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["sedan"],
+    features: [
+      "Daily dusting service",
+      "Standard steam cleaning",
+      "Exterior wash & polish",
+      "Interior vacuum & wipe",
+      "Eco-friendly process",
+      "Weekly maintenance"
+    ],
+    description: "Daily dusting with steam cleaning for sedans"
+  },
+  {
+    id: "sedan-daily-dusting",
+    name: "DAILY DUSTING",
+    price: 500,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["sedan"],
+    features: [
+      "Daily dusting service",
+      "Quick exterior wipe",
+      "Dashboard cleaning",
+      "Window cleaning",
+      "Minimal water usage",
+      "Eco-friendly approach"
+    ],
+    description: "Quick daily dusting service for sedans"
+  },
   {
     id: "sedan-premium-monthly",
     name: "MONTHLY PREMIUM SEDAN WASH",
@@ -202,6 +304,40 @@ const plans: Plan[] = [
 
   // SUV Plans
   {
+    id: "suv-daily-dusting-steam",
+    name: "DAILY DUSTING+ STANDARD STEAM CAR WASH",
+    price: 850,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["suv"],
+    features: [
+      "Daily dusting service",
+      "Standard steam cleaning",
+      "Exterior wash & polish",
+      "Interior vacuum & wipe",
+      "Eco-friendly process",
+      "Weekly maintenance"
+    ],
+    description: "Daily dusting with steam cleaning for SUVs"
+  },
+  {
+    id: "suv-daily-dusting",
+    name: "DAILY DUSTING",
+    price: 600,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["suv"],
+    features: [
+      "Daily dusting service",
+      "Quick exterior wipe",
+      "Dashboard cleaning",
+      "Window cleaning",
+      "Minimal water usage",
+      "Eco-friendly approach"
+    ],
+    description: "Quick daily dusting service for SUVs"
+  },
+  {
     id: "suv-premium-monthly",
     name: "MONTHLY PREMIUM SUV WASH",
     price: 1600,
@@ -256,6 +392,40 @@ const plans: Plan[] = [
 
   // XUV Plans
   {
+    id: "xuv-daily-dusting-steam",
+    name: "DAILY DUSTING+ STANDARD STEAM CAR WASH",
+    price: 950,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["xuv"],
+    features: [
+      "Daily dusting service",
+      "Standard steam cleaning",
+      "Exterior wash & polish",
+      "Interior vacuum & wipe",
+      "Eco-friendly process",
+      "Weekly maintenance"
+    ],
+    description: "Daily dusting with steam cleaning for large SUVs"
+  },
+  {
+    id: "xuv-daily-dusting",
+    name: "DAILY DUSTING",
+    price: 700,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["xuv"],
+    features: [
+      "Daily dusting service",
+      "Quick exterior wipe",
+      "Dashboard cleaning",
+      "Window cleaning",
+      "Minimal water usage",
+      "Eco-friendly approach"
+    ],
+    description: "Quick daily dusting service for large SUVs"
+  },
+  {
     id: "xuv-premium-monthly",
     name: "MONTHLY PREMIUM XUV WASH",
     price: 1800,
@@ -309,6 +479,40 @@ const plans: Plan[] = [
   },
 
   // Premium Plans
+  {
+    id: "premium-daily-dusting-steam",
+    name: "DAILY DUSTING+ STANDARD STEAM CAR WASH",
+    price: 1200,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["premium"],
+    features: [
+      "Daily dusting service",
+      "Premium steam cleaning",
+      "Hand wash exterior",
+      "Luxury interior wipe",
+      "Eco-friendly process",
+      "Weekly maintenance"
+    ],
+    description: "Daily dusting with premium steam cleaning for luxury cars"
+  },
+  {
+    id: "premium-daily-dusting",
+    name: "DAILY DUSTING",
+    price: 800,
+    validity: "7 days",
+    bonusCredits: 0,
+    vehicleTypes: ["premium"],
+    features: [
+      "Daily dusting service",
+      "Quick exterior wipe",
+      "Premium dashboard cleaning",
+      "Luxury window cleaning",
+      "Minimal water usage",
+      "Eco-friendly approach"
+    ],
+    description: "Quick daily dusting service for luxury vehicles"
+  },
   {
     id: "premium-luxury-monthly",
     name: "MONTHLY LUXURY PREMIUM WASH",
