@@ -16,21 +16,10 @@ import {
   Plus
 } from "lucide-react";
 
-interface Service {
-  id: string;
-  carType: string;
-  plan: string;
-  status: "pending" | "in-progress" | "completed" | "cancelled";
-  pickupType: "pickup" | "drop";
-  address?: string;
-  scheduledDate: string;
-  price: number;
-  progress: number;
-}
 
 const ConsumerDashboard = () => {
-  const [user, setUser] = useState<any>(null);
-  const [services, setServices] = useState<Service[]>([
+  const [user, setUser] = useState(null);
+  const [services, setServices] = useState([
     {
       id: "SD-123456",
       carType: "Sedan",
@@ -69,7 +58,7 @@ const ConsumerDashboard = () => {
     navigate("/");
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case "completed": return "bg-secondary text-secondary-foreground";
       case "in-progress": return "bg-primary text-primary-foreground";
@@ -79,7 +68,7 @@ const ConsumerDashboard = () => {
     }
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status) => {
     switch (status) {
       case "completed": return <CheckCircle className="h-4 w-4" />;
       case "in-progress": return <Clock className="h-4 w-4" />;

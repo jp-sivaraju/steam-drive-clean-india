@@ -24,36 +24,15 @@ import {
   Package
 } from "lucide-react";
 
-interface Service {
-  id: string;
-  customerName: string;
-  customerPhone: string;
-  carType: string;
-  plan: string;
-  status: "pending" | "in-progress" | "completed" | "cancelled";
-  pickupType: "pickup" | "drop";
-  address?: string;
-  scheduledDate: string;
-  price: number;
-  progress: number;
-}
-
-interface Plan {
-  id: string;
-  name: string;
-  price: number;
-  carTypes: string[];
-  features: string[];
-}
 
 const AdminDashboard = () => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState("current");
   const [filterCarType, setFilterCarType] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
-  const [editingPlan, setEditingPlan] = useState<Plan | null>(null);
+  const [editingPlan, setEditingPlan] = useState(null);
   
-  const [services] = useState<Service[]>([
+  const [services] = useState([
     {
       id: "SD-123456",
       customerName: "John Doe",
@@ -94,7 +73,7 @@ const AdminDashboard = () => {
     }
   ]);
 
-  const [plans, setPlans] = useState<Plan[]>([
+  const [plans, setPlans] = useState([
     {
       id: "monthly-premium",
       name: "MONTHLY PREMIUM CAR WASH",
@@ -133,7 +112,7 @@ const AdminDashboard = () => {
     navigate("/");
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case "completed": return "bg-secondary text-secondary-foreground";
       case "in-progress": return "bg-primary text-primary-foreground";
@@ -143,7 +122,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status) => {
     switch (status) {
       case "completed": return <CheckCircle className="h-4 w-4" />;
       case "in-progress": return <Clock className="h-4 w-4" />;

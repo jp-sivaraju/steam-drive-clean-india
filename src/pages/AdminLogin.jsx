@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const ConsumerLogin = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -15,25 +15,29 @@ const ConsumerLogin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate login API call
+    // Simulate admin login API call
     setTimeout(() => {
       setIsLoading(false);
-      if (email && password) {
-        // Mock successful login
-        localStorage.setItem("user", JSON.stringify({ email, role: "consumer" }));
+      if (email === "admin@steamdrive.com" && password === "admin123") {
+        // Mock successful admin login
+        localStorage.setItem("user", JSON.stringify({ 
+          email, 
+          role: "admin",
+          name: "Admin User" 
+        }));
         toast({
-          title: "Login Successful",
-          description: "Welcome back to Steam & Drive Car Wash!",
+          title: "Admin Login Successful",
+          description: "Welcome to Steam & Drive Admin Dashboard!",
         });
-        navigate("/consumer-dashboard");
+        navigate("/admin-dashboard");
       } else {
         toast({
-          title: "Login Failed",
-          description: "Please enter valid credentials.",
+          title: "Invalid Credentials",
+          description: "Please check your admin credentials.",
           variant: "destructive",
         });
       }
@@ -52,18 +56,29 @@ const ConsumerLogin = () => {
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Consumer Login</h1>
+          <div className="flex items-center">
+            <Shield className="h-6 w-6 text-primary mr-2" />
+            <h1 className="text-2xl font-bold text-foreground">Admin Login</h1>
+          </div>
+        </div>
+
+        <div className="mb-6 p-4 bg-muted/20 rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            <strong>Demo Credentials:</strong><br />
+            Email: admin@steamdrive.com<br />
+            Password: admin123
+          </p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-foreground">Email</Label>
+            <Label htmlFor="email" className="text-foreground">Admin Email</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="Enter admin email"
               required
             />
           </div>
@@ -76,7 +91,7 @@ const ConsumerLogin = () => {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
+                placeholder="Enter admin password"
                 required
               />
               <Button
@@ -96,24 +111,24 @@ const ConsumerLogin = () => {
             className="w-full bg-gradient-primary"
             disabled={isLoading}
           >
-            {isLoading ? "Signing In..." : "Sign In"}
+            {isLoading ? "Signing In..." : "Admin Sign In"}
           </Button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-muted-foreground">
-            Don't have an account?{" "}
-            <Link to="/consumer-signup" className="text-primary hover:underline">
-              Sign up here
+            Need admin access?{" "}
+            <Link to="/admin-signup" className="text-primary hover:underline">
+              Register here
             </Link>
           </p>
         </div>
 
         <div className="mt-4 text-center">
           <p className="text-muted-foreground text-sm">
-            Admin?{" "}
-            <Link to="/admin-login" className="text-secondary hover:underline">
-              Admin Login
+            Consumer?{" "}
+            <Link to="/consumer-login" className="text-secondary hover:underline">
+              Consumer Login
             </Link>
           </p>
         </div>
@@ -122,4 +137,4 @@ const ConsumerLogin = () => {
   );
 };
 
-export default ConsumerLogin;
+export default AdminLogin;

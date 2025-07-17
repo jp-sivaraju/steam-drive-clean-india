@@ -4,14 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const ConsumerSignup = () => {
+const AdminSignup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    adminCode: "",
     password: "",
     confirmPassword: "",
   });
@@ -21,14 +22,14 @@ const ConsumerSignup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -42,21 +43,31 @@ const ConsumerSignup = () => {
       return;
     }
 
-    // Simulate signup API call
+    if (formData.adminCode !== "STEAM2025") {
+      toast({
+        title: "Invalid Admin Code",
+        description: "Please enter a valid admin registration code.",
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Simulate admin signup API call
     setTimeout(() => {
       setIsLoading(false);
       if (formData.name && formData.email && formData.password) {
-        // Mock successful signup
+        // Mock successful admin signup
         localStorage.setItem("user", JSON.stringify({ 
           email: formData.email, 
           name: formData.name,
-          role: "consumer" 
+          role: "admin" 
         }));
         toast({
-          title: "Account Created",
-          description: "Welcome to Steam & Drive Car Wash!",
+          title: "Admin Account Created",
+          description: "Welcome to Steam & Drive Admin Panel!",
         });
-        navigate("/consumer-dashboard");
+        navigate("/admin-dashboard");
       } else {
         toast({
           title: "Signup Failed",
@@ -79,7 +90,17 @@ const ConsumerSignup = () => {
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Create Account</h1>
+          <div className="flex items-center">
+            <Shield className="h-6 w-6 text-primary mr-2" />
+            <h1 className="text-2xl font-bold text-foreground">Admin Registration</h1>
+          </div>
+        </div>
+
+        <div className="mb-6 p-4 bg-muted/20 rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            <strong>Demo Admin Code:</strong> STEAM2025<br />
+            (Required for admin registration)
+          </p>
         </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
@@ -118,6 +139,19 @@ const ConsumerSignup = () => {
               value={formData.phone}
               onChange={handleInputChange}
               placeholder="Enter your phone number"
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="adminCode" className="text-foreground">Admin Code</Label>
+            <Input
+              id="adminCode"
+              name="adminCode"
+              type="text"
+              value={formData.adminCode}
+              onChange={handleInputChange}
+              placeholder="Enter admin registration code"
               required
             />
           </div>
@@ -175,14 +209,14 @@ const ConsumerSignup = () => {
             className="w-full bg-gradient-primary"
             disabled={isLoading}
           >
-            {isLoading ? "Creating Account..." : "Create Account"}
+            {isLoading ? "Creating Account..." : "Create Admin Account"}
           </Button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-muted-foreground">
-            Already have an account?{" "}
-            <Link to="/consumer-login" className="text-primary hover:underline">
+            Already have an admin account?{" "}
+            <Link to="/admin-login" className="text-primary hover:underline">
               Sign in here
             </Link>
           </p>
@@ -192,4 +226,4 @@ const ConsumerSignup = () => {
   );
 };
 
-export default ConsumerSignup;
+export default AdminSignup;
