@@ -11,9 +11,9 @@ import ContactSection from "@/components/ContactSection";
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState("home");
-  const [selectedCarType, setSelectedCarType] = useState(undefined);
-  const [selectedPlan, setSelectedPlan] = useState(undefined);
-  const [orderSummary, setOrderSummary] = useState(undefined);
+  const [selectedCarType, setSelectedCarType] = useState();
+  const [selectedPlan, setSelectedPlan] = useState();
+  const [orderSummary, setOrderSummary] = useState();
 
   const handleCarTypeSelect = (carType) => {
     setSelectedCarType(carType);
@@ -51,7 +51,6 @@ const Index = () => {
 
   const handleBackToHome = () => {
     setCurrentStep("home");
-    // Reset all selections when going back to home
     setSelectedCarType(undefined);
     setSelectedPlan(undefined);
     setOrderSummary(undefined);
